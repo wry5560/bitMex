@@ -1,7 +1,9 @@
 
 console.time()
 var request = require('request');
+var Qs = require('Qs');
 var crypto = require('crypto');
+const Agent = require("socks5-https-client/lib/Agent")
 
 var apiKey = "3SMPUWkLtWDAhkDaMORSpms4";       //test
 var apiSecret = "A-R1s2zwV35wyC8i8LEA0waV8g7xsOdgcDpFcYit4SNUzkBk";   //test
@@ -10,14 +12,15 @@ var apiSecret = "A-R1s2zwV35wyC8i8LEA0waV8g7xsOdgcDpFcYit4SNUzkBk";   //test
 // var apiSecret = "0HjCj4-NNQdPR7ilgMGLadI322K2VxWBrEoISvCtQbjd8Anh";   //real
 
 var verb = 'GET',
-    path = '/api/v1/user',
+    path = '/api/v1/user/wallet?currency=XBt',
     expires = Math.round(new Date().getTime() / 1000) + 100, // 1 min in the future
-    data = '';
-
+    data ='';
+    // const param={...data}
+    // param.currency=encodeURI(param.currency)
 // Pre-compute the postBody so we can be sure that we're using *exactly* the same body in the request
 // and in the signature. If you don't do this, you might get differently-sorted keys and blow the signature.
 // var postBody = JSON.stringify(data);
-
+console.log(verb + path + expires + data)
 var signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + data).digest('hex');
 
 var headers = {
@@ -36,7 +39,9 @@ const requestOptions = {
     url:'https://testnet.bitmex.com'+path,
     // url:'https://www.bitmex.com'+path,
     method: verb,
-    // body: data
+    // strictSSL: true,
+    agentClass: Agent,
+
 };
 
 request(requestOptions, function(error, response, body) {

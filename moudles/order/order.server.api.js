@@ -2,15 +2,26 @@ import { axios } from '../../lib/request'
 import crypto from 'crypto'
 import Qs from 'qs'
 
-const reqAccount= async function (apiKey) {
+const reqOreder= async function (apiKey,options) {
     // console.log(apiKey)
     const {key,apiSecret}=apiKey[0]
     // console.log(key)
     const verb = 'GET'
-    const path = '/api/v1/user'
+    const params={
+        symbol:'XBTUSD',
+        filter:{},
+        columns:[],
+        count:100,
+        reverse:true,
+        startTime:'',
+        endTime:'',
+        ...options
+    }
+    const path = '/api/v1/order'+'?'+Qs.stringify(params)
     const expires = Math.round(new Date().getTime() / 1000) + 60          // 1 min in the future
     const data =''
-
+    const postData=JSON.stringify(data)
+    console.log(verb + path + expires + data)
     const signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + data).digest('hex');
 
     const headers = {
@@ -28,23 +39,34 @@ const reqAccount= async function (apiKey) {
         url:'https://testnet.bitmex.com'+path,
         // url:'https://www.baidu.com',
         method: 'GET',
-
+        body:postData
     };
     const res=await axios(requestOptions)
 
     return res
 }
 
-const reqWallet=async function (apiKey) {
+const updateOrder= async function (apiKey,options) {
+    // console.log(apiKey)
     const {key,apiSecret}=apiKey[0]
     // console.log(key)
-    const verb = 'GET'
-    const params={currency:'XBt'}
-    const path = '/api/v1/user/wallet'+'?'+Qs.stringify(params)
+    const verb = 'PUT'
+    const params={
+        symbol:'XBTUSD',
+        filter:{},
+        columns:[],
+        count:100,
+        reverse:true,
+        startTime:'',
+        endTime:'',
+        ...options
+    }
+    const path = '/api/v1/order'
     const expires = Math.round(new Date().getTime() / 1000) + 60          // 1 min in the future
     const data =''
-    console.log(verb + path + expires +data)
-    const signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires +data).digest('hex');
+    const postData=JSON.stringify(data)
+    console.log(verb + path + expires + data)
+    const signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + data).digest('hex');
 
     const headers = {
         'content-type' : 'application/json; charset=utf-8',
@@ -61,14 +83,13 @@ const reqWallet=async function (apiKey) {
         url:'https://testnet.bitmex.com'+path,
         // url:'https://www.baidu.com',
         method: 'GET',
-
-
+        body:postData
     };
     const res=await axios(requestOptions)
 
     return res
 }
-export const userApis={
-    reqAccount:reqAccount,
-    reqWallet:reqWallet
+
+export const orderApis={
+    reqOreder:reqOreder,
 }

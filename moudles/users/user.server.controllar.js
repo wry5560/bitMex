@@ -42,10 +42,24 @@ const usersControl={
     getAccountInfo:async (userName)=>{
         const res=await usersControl.getUserApiKey(userName)
         if(res.success){
-            console.log(userApis)
+            // console.log(userApis)
+            // console.log('apikey:'+res.data)
+
             const account=await userApis.reqAccount(res.data)
             // console.log('account:'+JSON.stringify(account))
             return account
+        }
+    },
+    getWallet:async (userName)=>{
+        const res=await usersControl.getUserApiKey(userName)
+        if(res.success){
+            // console.log(userApis)
+            // console.log('apikey:'+res.data)
+
+            const wallet=await userApis.reqWallet(res.data)
+            console.log('wallet:'+JSON.stringify(wallet))
+
+            return wallet
         }
     }
 }

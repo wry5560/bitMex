@@ -22,5 +22,10 @@ router.get('/:userName/info',async function(req, res, next) {
   const tmp=await userControl.getAccountInfo(req.params.userName)
   res.send(tmp);
 });
+router.get('/:userName/wallet',async function(req, res, next) {
+    console.log('/:userName/wallet')
+    const tmp=await userControl.getWallet(req.params.userName)
+    res.send(tmp);
+});
 
 module.exports = router;
