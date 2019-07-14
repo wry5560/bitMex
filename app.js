@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var orderRouter = require('./routes/order');
 var ejs = require('ejs')
+var cors = require('cors')
 
 var app = express();
 
@@ -15,7 +16,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'))
 app.engine('.html',ejs.__express);
 app.set('view engine', 'html');
-
+app.use(cors({credentials: true, origin: 'http://localhost:8080'}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

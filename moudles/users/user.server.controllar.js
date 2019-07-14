@@ -44,7 +44,6 @@ const usersControl={
         if(res.success){
             // console.log(userApis)
             // console.log('apikey:'+res.data)
-
             const account=await userApis.reqAccount(res.data)
             // console.log('account:'+JSON.stringify(account))
             return account
@@ -55,10 +54,8 @@ const usersControl={
         if(res.success){
             // console.log(userApis)
             // console.log('apikey:'+res.data)
-
             const wallet=await userApis.reqWallet(res.data)
             console.log('wallet:'+JSON.stringify(wallet))
-
             return wallet
         }
     }
