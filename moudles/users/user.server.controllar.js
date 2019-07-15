@@ -58,6 +58,16 @@ const usersControl={
             console.log('wallet:'+JSON.stringify(wallet))
             return wallet
         }
+    },
+    getWalletHistory:async (userName)=>{
+        const res=await usersControl.getUserApiKey(userName)
+        if(res.success){
+            // console.log(userApis)
+            // console.log('apikey:'+res.data)
+            const walletHistory=await userApis.reqWalletHistory(res.data)
+            console.log('walletHistory:'+JSON.stringify(walletHistory))
+            return walletHistory
+        }
     }
 }
 

@@ -1,12 +1,15 @@
 import { axios } from '../../lib/request'
 import crypto from 'crypto'
 import Qs from 'qs'
+import {settings} from '../..//config/dev-setting'
+var baseUrl=settings.isTest ? settings.testApiBaseUrl:settings.apiBaseUrl
+
 var request = require('request');
 const Agent = require("socks5-https-client/lib/Agent")
 
 const reqOreder= async function (apiKey,options) {
     // console.log(apiKey)
-    const {key,apiSecret}=apiKey[0]
+    const {key,apiSecret}=settings.isTest ? apiKey[0] : apiKey[1]
     // console.log(key)
     const verb = 'GET'
     const params={
@@ -38,7 +41,7 @@ const reqOreder= async function (apiKey,options) {
     const requestOptions = {
         headers: headers,
         // url:'https://www.bitmex.com'+path,
-        url:'https://testnet.bitmex.com'+path,
+        url:baseUrl + path,
         // url:'https://www.baidu.com',
         method: verb,
         body:postData
@@ -50,7 +53,7 @@ const reqOreder= async function (apiKey,options) {
 
 const updateOrder= async function (apiKey,options) {
     // console.log(apiKey)
-    const {key,apiSecret}=apiKey[0]
+    const {key,apiSecret}=settings.isTest ? apiKey[0] : apiKey[1]
     // console.log(key)
     const verb = 'PUT'
     const params={}
@@ -84,7 +87,7 @@ const updateOrder= async function (apiKey,options) {
     const requestOptions = {
         headers: headers,
         // url:'https://www.bitmex.com'+path,
-        url:'https://testnet.bitmex.com'+path,
+        url:baseUrl + path,
         // url:'https://www.baidu.com',
         method: verb,
         data:postData
@@ -96,7 +99,7 @@ const updateOrder= async function (apiKey,options) {
 
 const createOrder= async function (apiKey,options) {
     // console.log(apiKey)
-    const {key,apiSecret}=apiKey[0]
+    const {key,apiSecret}=settings.isTest ? apiKey[0] : apiKey[1]
     // console.log(key)
     const verb = 'POST'
     const params={}
@@ -134,7 +137,7 @@ const createOrder= async function (apiKey,options) {
     const requestOptions = {
         headers: headers,
         // url:'https://www.bitmex.com'+path,
-        url:'https://testnet.bitmex.com'+path,
+        url:baseUrl + path,
         // url:'https://www.baidu.com',
         method:verb,
         data:postData,
@@ -153,7 +156,7 @@ const createOrder= async function (apiKey,options) {
 
 const delOrder= async function (apiKey,options) {
     // console.log(apiKey)
-    const {key,apiSecret}=apiKey[0]
+    const {key,apiSecret}=settings.isTest ? apiKey[0] : apiKey[1]
     // console.log(key)
     const verb = 'DELETE'
     const params={}
@@ -181,7 +184,7 @@ const delOrder= async function (apiKey,options) {
     const requestOptions = {
         headers: headers,
         // url:'https://www.bitmex.com'+path,
-        url:'https://testnet.bitmex.com'+path,
+        url:baseUrl + path,
         // url:'https://www.baidu.com',
         method:verb,
         data:postData
@@ -193,7 +196,7 @@ const delOrder= async function (apiKey,options) {
 
 const delOrderAll= async function (apiKey,options) {
     // console.log(apiKey)
-    const {key,apiSecret}=apiKey[0]
+    const {key,apiSecret}=settings.isTest ? apiKey[0] : apiKey[1]
     // console.log(key)
     const verb = 'DELETE'
     const params={}
@@ -221,7 +224,7 @@ const delOrderAll= async function (apiKey,options) {
     const requestOptions = {
         headers: headers,
         // url:'https://www.bitmex.com'+path,
-        url:'https://testnet.bitmex.com'+path,
+        url:baseUrl + path,
         // url:'https://www.baidu.com',
         method:verb,
         data:postData
@@ -233,7 +236,7 @@ const delOrderAll= async function (apiKey,options) {
 
 const cancelAllAfter= async function (apiKey,options) {
     // console.log(apiKey)
-    const {key,apiSecret}=apiKey[0]
+    const {key,apiSecret}=settings.isTest ? apiKey[0] : apiKey[1]
     // console.log(key)
     const verb = 'POST'
     const params={}
@@ -259,7 +262,7 @@ const cancelAllAfter= async function (apiKey,options) {
     const requestOptions = {
         headers: headers,
         // url:'https://www.bitmex.com'+path,
-        url:'https://testnet.bitmex.com'+path,
+        url:baseUrl + path,
         // url:'https://www.baidu.com',
         method:verb,
         data:postData
@@ -271,7 +274,7 @@ const cancelAllAfter= async function (apiKey,options) {
 
 const closePosition= async function (apiKey,options) {
     // console.log(apiKey)
-    const {key,apiSecret}=apiKey[0]
+    const {key,apiSecret}=settings.isTest ? apiKey[0] : apiKey[1]
     // console.log(key)
     const verb = 'POST'
     const params={}
@@ -298,7 +301,7 @@ const closePosition= async function (apiKey,options) {
     const requestOptions = {
         headers: headers,
         // url:'https://www.bitmex.com'+path,
-        url:'https://testnet.bitmex.com'+path,
+        url:baseUrl + path,
         // url:'https://www.baidu.com',
         method:verb,
         data:postData

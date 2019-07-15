@@ -5,8 +5,8 @@ import orderControl from '../moudles/order/order.server.controllar'
 /* GET users listing. */
 router.get('/',async function(req, res, next) {
     console.log('get order')
-    if(!req.params.username)res.send({success:false,message:'No username'})
-  const data=await orderControl.getOrder(req.params.username)
+    if(!req.query.username)res.send({success:false,message:'No username'})
+  const data=await orderControl.getOrder(req.query.username)
   res.send(data);
 });
 
@@ -53,7 +53,5 @@ router.post('/',async function(req, res, next) {
             res.send(data);
             break
     }
-
-
 });
 module.exports = router;
