@@ -13,10 +13,10 @@ const reqOreder= async function (apiKey,options) {
     // console.log(key)
     const verb = 'GET'
     const params={
-        symbol:'XBTUSD',
+        symbol:'',
         filter:{},
         columns:[],
-        count:100,
+        count:30,
         reverse:true,
         startTime:'',
         endTime:'',
