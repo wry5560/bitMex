@@ -189,8 +189,9 @@ const delOrder= async function (apiKey,options) {
         method:verb,
         data:postData
     };
+    console.time()
     const res=await axios(requestOptions)
-
+    console.timeEnd()
     return res
 }
 
