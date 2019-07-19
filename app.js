@@ -7,8 +7,10 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var testRouter = require('./routes/test');
 var orderRouter = require('./routes/order');
 var executionRouter = require('./routes/execution');
+var levelPriceCelveRouter = require('./routes/levelPriceCelve');
 var ejs = require('ejs')
 var cors = require('cors')
 
@@ -31,14 +33,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/test', testRouter);
 app.use('/order', orderRouter);
 app.use('/execution', executionRouter);
+app.use('/levelPriceCelve', levelPriceCelveRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
+app.locals.myTest111='CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC'
+global.test = "ydr.me";
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
