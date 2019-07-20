@@ -1,4 +1,4 @@
-
+import wsClient from './bitMexWs'
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -24,6 +24,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'))
 app.engine('.html',ejs.__express);
 app.set('view engine', 'html');
+//设置跨域
 app.use(cors({credentials: true, origin: 'http://localhost:8080'}));
 app.use(logger('dev'));
 app.use(express.json());

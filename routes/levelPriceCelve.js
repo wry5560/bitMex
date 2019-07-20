@@ -62,7 +62,7 @@ router.post('/',async function(req, res, next) {
             break
         case 'stop':
             try{
-                data=await levelPriceCelveControl.stopCelve(_id)
+                data=await levelPriceCelveControl.stopCelve(_id,options)
                 res.send({data,success:true});
             }catch(e) {
                 res.send({message:e,success:false});

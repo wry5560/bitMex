@@ -2,6 +2,7 @@ import levelPriceCelveModel from './levelPriceCelve.server.service'
 import mongoose from 'mongoose'
 import {levelPriceCelveApis} from './levelPriceCelve.server.api'
 import usersControl from '../users/user.server.controllar'
+import moment from 'moment'
 
 // const levelPriceCelveModel = mongoose.model('levelPriceCelve')
 
@@ -24,6 +25,7 @@ const levelPriceCelveControl={
     },
     updateCelve: async (id,params) =>{
         try{
+            params.actions.unshift('策略更新...' + ' ' + moment().format('YYYY-MM-DD HH:mm:ss'))
             const res = await levelPriceCelveModel.update({_id: id},params)
             return res
         }catch (e) {
@@ -32,7 +34,9 @@ const levelPriceCelveControl={
     },
     stopCelve: async (id,params) =>{
         try{
-            const res = await levelPriceCelveModel.update({_id: id},{state:0})
+            params.actions.unshift('策略停止...' + ' ' + moment().format('YYYY-MM-DD HH:mm:ss'))
+            params.state = 0
+            const res = await levelPriceCelveModel.update({_id: id},params)
             return res
         }catch (e) {
             console.error(e)
@@ -41,6 +45,8 @@ const levelPriceCelveControl={
     insertCelve: async (options)=> {
         try {
             console.log('insertCelve',JSON.stringify(options))
+            options.actions=[]
+            options.actions.unshift('策略开始...' + ' ' + moment().format('YYYY-MM-DD HH:mm:ss'))
             const newCelve = new levelPriceCelveModel(options)
             newCelve.save()
             // const res = await levelPriceCelveModel.create(options)
