@@ -1,5 +1,4 @@
-const io = require('socket.io-client')
-const socket = io.connect('ws://123.207.167.163:9010/ajaxchattest')
+const socket = require('socket.io-client')('wss://testnet.bitmex.com/realtime')
 
 console.log('ws connect start!');
 socket.on('connect',function (socket) {

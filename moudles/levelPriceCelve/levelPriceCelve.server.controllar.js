@@ -25,7 +25,7 @@ const levelPriceCelveControl={
     },
     updateCelve: async (id,params) =>{
         try{
-            params.actions.unshift('策略更新...' + ' ' + moment().format('YYYY-MM-DD HH:mm:ss'))
+            // params.actions.unshift('策略更新...' + ' ' + moment().format('YYYY-MM-DD HH:mm:ss'))
             const res = await levelPriceCelveModel.update({_id: id},params)
             return res
         }catch (e) {
