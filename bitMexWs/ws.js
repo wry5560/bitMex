@@ -1,6 +1,12 @@
 const WebSocket =require('ws')
-
-const ws = new WebSocket('wss://testnet.bitmex.com/realtime')
+import bitMexSignature from './bitmex_signature'
+import moment from 'moment'
+import 'moment/locale/zh-cn'
+import { reqUsers,  reqOrders, postOrders, postLevelPriceCelve, getLevelPriceCelve } from './api'
+import {settings} from '../config/dev-setting'
+const {isTest} = settings
+const wsuri =isTest ?  'wss://testnet.bitmex.com/realtime' : 'wss://www.bitmex.com/realtime'
+const ws = new WebSocket(wsuri)
 console.log('ws start connect!')
 // 发送
 ws.on('open', () => {
