@@ -6,7 +6,7 @@ import levelPriceCelveControl from '../moudles/levelPriceCelve/levelPriceCelve.s
 
 /* GET users listing. */
 router.get('/',async function(req, res, next) {
-    console.log('get levelPriceCelve')
+    // console.log('get levelPriceCelve')
     if( req.query.type ==='running' ){
         try{
             const data = await levelPriceCelveControl.getAllRunning()
@@ -29,7 +29,7 @@ router.get('/',async function(req, res, next) {
 });
 
 router.post('/',async function(req, res, next) {
-    console.log('poet levelPriceCelve')
+    // console.log('poet levelPriceCelve')
     console.log(req.body)
     const {postType,_id,...options}=req.body
     console.log('postType:'+postType)
