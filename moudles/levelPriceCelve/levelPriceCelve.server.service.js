@@ -10,15 +10,16 @@ const levelPriceCelveSchema = new Schema({
     startPrice: Number,
     qt:Number,
     level: Number,
-    preLevel:{type:Number,default:0},
+    preLevel:{type:Number,default:-1},
     currentLevel:{type:Number,default:0},
     nextLevel:{type:Number,default:1},
     levelPrice: Number,
     stopPrice:Number,
     prePrice:Number,
+    currentPrice:Number,
     nextPrice: Number,
     actions: {type:Array,default:[]},
-    offset: {type: Number,default: 0},
+    offset: {type: Number,default: 0.5},
     state: {type:Boolean,default:true},
 }, {
     collection: 'levelPriceCelve'
