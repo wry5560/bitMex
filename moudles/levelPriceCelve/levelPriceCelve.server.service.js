@@ -14,6 +14,7 @@ const levelPriceCelveSchema = new Schema({
     currentLevel:{type:Number,default:0},
     nextLevel:{type:Number,default:1},
     levelPrice: Number,
+    preStopPrice:{type:Number,default:999999},
     stopPrice:Number,
     prePrice:Number,
     currentPrice:Number,
