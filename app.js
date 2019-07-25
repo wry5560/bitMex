@@ -25,7 +25,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.engine('.html',ejs.__express);
 app.set('view engine', 'html');
 //设置跨域
-app.use(cors({credentials: true, origin:['http://localhost:8080','http://47.245.26.247','http:127.0.0.1']}));
+app.use(cors({credentials: true, origin:['http://localhost:8080','http://47.245.26.247','http:127.0.0.1','http://47.240.17.43:8080','http://47.240.17.43']}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
