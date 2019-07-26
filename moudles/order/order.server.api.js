@@ -154,6 +154,63 @@ const createOrder= async function (apiKey,options) {
     return res
 }
 
+const createMultiOrders= async function (apiKey,options) {
+    // console.log(apiKey)
+    const {key,apiSecret}=settings.isTest ? apiKey[0] : apiKey[1]
+    // console.log(key)
+    const verb = 'POST'
+    const params={}
+    const path = '/api/v1/order/bulk'
+    const expires = Math.round(new Date().getTime() / 1000) + 60          // 1 min in the future
+    const data ={
+        // symbol:'',          //Instrument symbol. e.g. 'XBTUSD'.
+        // side:'',            //Order side. Valid options: Buy, Sell. Defaults to 'Buy' unless orderQty is negative.
+        // orderQty:'',          //Order quantity in units of the instrument (i.e. contracts).
+        // price:null,       //Optional limit price for 'Limit', 'StopLimit', and 'LimitIfTouched' orders.
+        // displayQty:null,  //Optional quantity to display in the book. Use 0 for a fully hidden order.
+        // clOrdID:'',       //Optional Client Order ID. This clOrdID will come back on the order and any related executions.
+        // stopPx:null,      //Optional trigger price for 'Stop', 'StopLimit', 'MarketIfTouched', and 'LimitIfTouched' orders. Use a price below the current price for stop-sell orders and buy-if-touched orders.
+        // pegOffsetValue:null,    //Optional trailing offset from the current price for 'Stop', 'StopLimit', 'MarketIfTouched', and 'LimitIfTouched' orders; use a negative offset for stop-sell orders and buy-if-touched orders. Optional offset from the peg price for 'Pegged' orders.
+        // pegPriceType:'',     //Optional peg price type. Valid options: LastPeg, MidPricePeg, MarketPeg, PrimaryPeg, TrailingStopPeg.
+        // ordType:'Limit',     //Order type. Valid options: Market, Limit, Stop, StopLimit, MarketIfTouched, LimitIfTouched, Pegged. Defaults to 'Limit' when price is specified. Defaults to 'Stop' when stopPx is specified. Defaults to 'StopLimit' when price and stopPx are specified.
+        // timeInForce:'',      //Time in force. Valid options: Day, GoodTillCancel, ImmediateOrCancel, FillOrKill. Defaults to 'GoodTillCancel' for 'Limit', 'StopLimit', and 'LimitIfTouched' orders.
+        // execInst:'',        //Optional execution instructions. Valid options: ParticipateDoNotInitiate, AllOrNone, MarkPrice, IndexPrice, LastPrice, Close, ReduceOnly, Fixed. 'AllOrNone' instruction requires displayQty to be 0. 'MarkPrice', 'IndexPrice' or 'LastPrice' instruction valid for 'Stop', 'StopLimit', 'MarketIfTouched', and 'LimitIfTouched' orders.
+        // text:'',            //Optional amend annotation. e.g. 'Adjust skew'.
+        ...options
+    }
+    const postData=JSON.stringify(data)
+    console.log(verb + path + expires + postData)
+    const signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + postData).digest('hex');
+
+    const headers = {
+        'content-type' : 'application/json; charset=utf-8',
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'api-expires': expires,
+        'api-key': key,
+        'api-signature': signature
+    }
+
+    const requestOptions = {
+        headers: headers,
+        // url:'https://www.bitmex.com'+path,
+        url:baseUrl + path,
+        // url:'https://www.baidu.com',
+        method:verb,
+        data:postData,
+        // agentClass: Agent
+    };
+    // request(requestOptions, function(error, response, body) {
+    //     console.log('request start')
+    //     if (error) { console.log(error); }
+    //     console.log(body);
+    //     console.timeEnd()
+    // });
+    const res=await axios(requestOptions)
+
+    return res
+}
+
 const delOrder= async function (apiKey,options) {
     // console.log(apiKey)
     const {key,apiSecret}=settings.isTest ? apiKey[0] : apiKey[1]
@@ -315,6 +372,7 @@ export const orderApis={
     reqOreder:reqOreder,
     updateOrder:updateOrder,
     createOrder:createOrder,
+    createMultiOrders:createMultiOrders,
     delOrder:delOrder,
     delOrderAll:delOrderAll,
     cancelAllAfter:cancelAllAfter,

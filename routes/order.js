@@ -28,6 +28,10 @@ router.post('/',async function(req, res, next) {
             data=await orderControl.createOrder(username,options)
             res.send(data);
             break
+        case 'create mulit':
+            data=await orderControl.createMultiOrders(username,options)
+            res.send(data);
+            break
         case 'update':
             data=await orderControl.updateOrder(username,options)
             res.send(data);
