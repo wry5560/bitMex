@@ -3,12 +3,14 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+// var logger = require('morgan');
+var logger = require('./lib/log4js');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testRouter = require('./routes/test');
 var orderRouter = require('./routes/order');
+var logRouter = require('./routes/logApi');
 var executionRouter = require('./routes/execution');
 var levelPriceCelveRouter = require('./routes/levelPriceCelve');
 var ejs = require('ejs')
@@ -24,9 +26,11 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'))
 app.engine('.html',ejs.__express);
 app.set('view engine', 'html');
+
+logger.use(app);
 //设置跨域
-app.use(cors({credentials: true, origin:['http://localhost:8080','http://47.245.26.247','http:127.0.0.1','http://47.240.17.43:8080','http://47.240.17.43']}));
-app.use(logger('dev'));
+app.use(cors({credentials: true, origin:['http://localhost:8080','http:127.0.0.1','http://47.240.17.43:8080','http://47.240.17.43','http://47.240.17.43:80']}));
+// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -38,6 +42,7 @@ app.use('/test', testRouter);
 app.use('/order', orderRouter);
 app.use('/execution', executionRouter);
 app.use('/levelPriceCelve', levelPriceCelveRouter);
+app.use('/logApi', logRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

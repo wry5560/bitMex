@@ -10,7 +10,7 @@ const reqAccount= async function (apiKey) {
     // console.log(key)
     const verb = 'GET'
     const path = '/api/v1/user'
-    const expires = Math.round(new Date().getTime() / 1000) + 60          // 1 min in the future
+    const expires = Math.round(new Date().getTime() / 1000) + 120          // 1 min in the future
     const data =''
 
     const signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires + data).digest('hex');
@@ -44,7 +44,7 @@ const reqWallet=async function (apiKey) {
     const verb = 'GET'
     const params={currency:'XBt'}
     const path = '/api/v1/user/wallet'+'?'+Qs.stringify(params)
-    const expires = Math.round(new Date().getTime() / 1000) + 60          // 1 min in the future
+    const expires = Math.round(new Date().getTime() / 1000) + 120          // 1 min in the future
     const data =''
     console.log(verb + path + expires +data)
     const signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires +data).digest('hex');
@@ -79,7 +79,7 @@ const reqWalletHistory=async function (apiKey) {
     const verb = 'GET'
     const params={currency:'XBt',count:30}
     const path = '/api/v1/user/walletHistory'+'?'+Qs.stringify(params)
-    const expires = Math.round(new Date().getTime() / 1000) + 60          // 1 min in the future
+    const expires = Math.round(new Date().getTime() / 1000) + 120          // 1 min in the future
     const data =''
     console.log(verb + path + expires +data)
     const signature = crypto.createHmac('sha256', apiSecret).update(verb + path + expires +data).digest('hex');

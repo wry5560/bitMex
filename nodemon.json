@@ -3,6 +3,7 @@
     "ignore": [
     ".git",
     ".svn",
+    "logs/**/logs",
     "node_modules/**/node_modules"
 ],
     "verbose": true,

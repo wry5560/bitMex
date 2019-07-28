@@ -161,7 +161,7 @@ const createMultiOrders= async function (apiKey,options) {
     const verb = 'POST'
     const params={}
     const path = '/api/v1/order/bulk'
-    const expires = Math.round(new Date().getTime() / 1000) + 60          // 1 min in the future
+    const expires = Math.round(new Date().getTime() / 1000) + 120          // 1 min in the future
     const data ={
         // symbol:'',          //Instrument symbol. e.g. 'XBTUSD'.
         // side:'',            //Order side. Valid options: Buy, Sell. Defaults to 'Buy' unless orderQty is negative.
@@ -218,7 +218,7 @@ const delOrder= async function (apiKey,options) {
     const verb = 'DELETE'
     const params={}
     const path = '/api/v1/order'
-    const expires = Math.round(new Date().getTime() / 1000) + 60          // 1 min in the future
+    const expires = Math.round(new Date().getTime() / 1000) + 120          // 1 min in the future
     const data ={
         orderID:'',          //Order ID(s）
         clOrdID:'',       //Optional Client Order ID. This clOrdID will come back on the order and any related executions.
@@ -259,7 +259,7 @@ const delOrderAll= async function (apiKey,options) {
     const verb = 'DELETE'
     const params={}
     const path = '/api/v1/order/all'
-    const expires = Math.round(new Date().getTime() / 1000) + 60          // 1 min in the future
+    const expires = Math.round(new Date().getTime() / 1000) + 120          // 1 min in the future
     const data ={
         symbol:'',          //Optional symbol. If provided, only cancels orders for that symbol.
         filter:{},       //Optional filter for cancellation. Use to only cancel some orders, e.g. {"side": "Buy"}
@@ -299,7 +299,7 @@ const cancelAllAfter= async function (apiKey,options) {
     const verb = 'POST'
     const params={}
     const path = '/api/v1/order/cancelAllAfter'
-    const expires = Math.round(new Date().getTime() / 1000) + 60          // 1 min in the future
+    const expires = Math.round(new Date().getTime() / 1000) + 120          // 1 min in the future
     const data ={
         timeout:0,         //Timeout in ms. Set to 0 to cancel this timer.
         ...options
@@ -337,7 +337,7 @@ const closePosition= async function (apiKey,options) {
     const verb = 'POST'
     const params={}
     const path = '/api/v1/order/closePosition'
-    const expires = Math.round(new Date().getTime() / 1000) + 60          // 1 min in the future
+    const expires = Math.round(new Date().getTime() / 1000) + 120          // 1 min in the future
     const data ={
         symbol:'',         //Symbol of position to close..
         price:null,       //Optional limit price.

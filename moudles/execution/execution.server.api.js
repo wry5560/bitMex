@@ -20,7 +20,7 @@ const reqTradeHistory= async function (apiKey,options) {
         ...options
     }
     const path = '/api/v1/execution/tradeHistory'+'?'+Qs.stringify(params)
-    const expires = Math.round(new Date().getTime() / 1000) + 60          // 1 min in the future
+    const expires = Math.round(new Date().getTime() / 1000) + 120          // 1 min in the future
     const data =''
     const postData=JSON.stringify(data)
     console.log(verb + path + expires + data)

@@ -30,7 +30,7 @@ router.get('/',async function(req, res, next) {
 
 router.post('/',async function(req, res, next) {
     // console.log('poet levelPriceCelve')
-    console.log(req.body)
+    console.log('req.body' , req.body)
     const {postType,_id,...options}=req.body
     console.log('postType:'+postType)
     console.log('options:'+JSON.stringify(options))
@@ -41,7 +41,7 @@ router.post('/',async function(req, res, next) {
                 data=await levelPriceCelveControl.insertCelve(options)
                 res.send({data,success:true});
             }catch(e) {
-            res.send({message:e,success:false});
+            res.send({message:e.data,success:false});
             }
             break
         case 'update':
