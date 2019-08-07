@@ -1,43 +1,45 @@
-import users from './user.server.service'
+import accountsModel from './user.server.service'
 import {userApis} from './user.server.api'
+var logger = require('../../lib/log4js').logger;
 
 const usersControl={
-    getUsers:()=>{
-        return users
+    getUsers:async ()=>{
+        try{
+            const allUsers = await accountsModel.find()
+            logger.info('getAll accounts:'+JSON.stringify(allUsers))
+            return allUsers
+        }catch (e) {
+            // console.error(e)
+            logger.error(e)
+        }
     },
-    getUserByUsername:(userName)=>{
-        return new Promise((resolve,reject)=>{
-            const user=users.find(user=>
-                user.userName==userName
-            )
-            if(!user){
-                resolve({
+    getUserByUsername:async (userName)=>{
+            const user= await accountsModel.find({userName:userName})
+            logger.info('get  accounts:'+JSON.stringify(user))
+            if(!user[0]){
+                return {
                     status:'error',
                     message:'User not found!'
-                })
+                }
             }
-            resolve({
+            return{
                 status:'success',
-                data:user
-            })
-        })
+                data:user[0]
+            }
     },
-    getUserApiKey:(userName)=>{
-        return new Promise((resolve,reject)=>{
-            const user=users.find(user=>
-                user.userName==userName
-            )
-            if(!user){
-                resolve({
+    getUserApiKey:async (userName)=>{
+            const user= await accountsModel.find({userName:userName})
+            logger.info('get  account:'+JSON.stringify(user))
+            if(!user[0]){
+                return{
                     success:false,
                     message:'User not found!'
-                })
+                }
             }
-            resolve({
+            return{
                 success:true,
-                data:user.apiKey
-            })
-        })
+                data:user[0].apiKey
+            }
     },
     getAccountInfo:async (userName)=>{
         const res=await usersControl.getUserApiKey(userName)
