@@ -34,7 +34,7 @@ app.set('view engine', 'html');
 
 logger.use(app);
 //设置跨域
-app.use(cors({credentials: true, origin:['http://localhost:8080','http:127.0.0.1','http://47.240.17.43:8080','http://47.240.17.43','http://47.240.17.43:80']}));
+app.use(cors({credentials: true, origin:['http://localhost:8080','http:127.0.0.1','http://47.240.17.43:8080','http://47.240.17.43','http://47.240.17.43:80','http://localhost:8081']}));
 // app.use(logger('dev'));
 
 // 使用 session 中间件
