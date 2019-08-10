@@ -4,6 +4,7 @@ var router = express.Router();
 var md5 = require('md5-node');
 var logger = require('../lib/log4js').logger;
 import loginUsersControl from  '../moudles/loginUsers/loginUsers.server.controllar'
+import loginInfoControl from  '../moudles/login/login.server.controllar'
 
 // 用户登录
 router.post('/',async function(req, res){
@@ -48,6 +49,11 @@ router.post('/password',async function(req, res){
             })
         }
     }
+});
+
+router.post('/info',async function(req, res){
+        const result = await loginInfoControl.createLoginInfo(req.body)
+        res.json(result)
 });
 
 module.exports = router;
