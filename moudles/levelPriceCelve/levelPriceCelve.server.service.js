@@ -5,6 +5,8 @@ const {Schema} = mongoose
 const levelPriceCelveSchema = new Schema({
     type: {type:String,default:'Limit'},
     celveType:{type:String,default:'Single'},
+    levelStopType:{type:String,default:'normal'},
+    stopLevel:{type:String,default:0},
     totalTimes:{type:Number,default:0},
     side: String,
     username: [String,Array],
