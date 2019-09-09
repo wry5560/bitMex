@@ -7,6 +7,7 @@ const accountsSchema = new Schema({
     userName: String,
     email:String,
     apiKey: Array,
+    celveType:String
 }, {
     collection: 'accounts'
 })

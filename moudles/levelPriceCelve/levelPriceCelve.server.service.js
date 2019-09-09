@@ -18,6 +18,7 @@ const levelPriceCelveSchema = new Schema({
     side: String,
     username: [String,Array],
     startPrice: Number,
+    startTime:String,
     firstTime:{type:Boolean,default:true},
     qt:Number,
     level: Number,
