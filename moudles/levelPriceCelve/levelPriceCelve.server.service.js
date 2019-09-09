@@ -6,6 +6,7 @@ const levelPriceCelveSchema = new Schema({
     type: {type:String,default:'Limit'},
     celveType:{type:String,default:'Single'},
     levelStopType:{type:String,default:'normal'},
+    autoStop:{type:Boolean,default:false},
     stopLevel:{type:Number,default:0},
     totalTimes:{type:Number,default:0},
     reduceTimes:{type:Number,default:0},
