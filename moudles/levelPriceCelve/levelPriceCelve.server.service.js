@@ -10,6 +10,7 @@ const levelPriceCelveSchema = new Schema({
     stopLevel:{type:Number,default:0},
     totalTimes:{type:Number,default:0},
     reduceTimes:{type:Number,default:0},
+    isReduce:{type:Boolean,default:0},
     currentPosition:{type:Number,default:0},
     startPosition:{type:Number,default:0},
     buyQt:Number,
