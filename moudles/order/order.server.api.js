@@ -98,7 +98,7 @@ const updateOrder= async function (apiKey,options) {
 }
 
 const createOrder= async function (apiKey,options) {
-    // console.log(apiKey)
+    console.log('apiKey'+apiKey)
     const {key,apiSecret}=settings.isTest ? apiKey[0] : apiKey[1]
     // console.log(key)
     const verb = 'POST'
@@ -149,6 +149,7 @@ const createOrder= async function (apiKey,options) {
     //     console.log(body);
     //     console.timeEnd()
     // });
+    console.log('requestOptions:'+requestOptions)
     const res=await axios(requestOptions)
 
     return res

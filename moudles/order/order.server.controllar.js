@@ -33,14 +33,14 @@ const orderControl={
     },
 
     createOrder:async (userName,options)=>{
-        // console.log(userName)
+        console.log(userName)
         const apiKey=await usersControl.getUserApiKey(userName)
         console.log('apiKey'+JSON.stringify(apiKey))
         if(apiKey.success){
             // console.log(userApis)
-            // console.log('apikey:'+res.data)
+            console.log('apikey:'+apiKey.data)
             const res=await orderApis.createOrder(apiKey.data,options)
-            // console.log('create res:'+JSON.stringify(res))
+            console.log('create res:'+JSON.stringify(res))
             logger.info('create res:'+JSON.stringify(res))
             return res
         }

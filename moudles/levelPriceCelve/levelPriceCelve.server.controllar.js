@@ -55,7 +55,7 @@ const levelPriceCelveControl={
         try {
             logger.info('insertCelve',JSON.stringify(options))
             options.actions=[]
-            options.actions.unshift('策略开始...' + ' ' + moment().format('YYYY-MM-DD HH:mm:ss'))
+            options.actions.unshift('策略创建时间...' + ' ' + moment().format('YYYY-MM-DD HH:mm:ss'))
             const newCelve = new levelPriceCelveModel(options)
             newCelve.save()
             logger.info('insertCelve:'+JSON.stringify(newCelve))

@@ -9,6 +9,7 @@ const levelPriceCelveSchema = new Schema({
     autoStop:{type:Boolean,default:false},
     stopLevel:{type:Number,default:0},
     totalTimes:{type:Number,default:0},
+    dayTradeTimes:{type:Array,default:[]},
     reduceTimes:{type:Number,default:0},
     isReduce:{type:Boolean,default:0},
     currentPosition:{type:Number,default:0},
@@ -22,14 +23,15 @@ const levelPriceCelveSchema = new Schema({
     startPrice: Number,
     startTime:String,
     firstTime:{type:Boolean,default:true},
+    updated:{type:Boolean,default:false},
     qt:Number,
     level: Number,
     preLevel:{type:Number,default:-1},
     currentLevel:{type:Number,default:0},
     nextLevel:{type:Number,default:1},
     levelPrice: Number,
-    buyStopPrice:Number,
-    sellStopPrice:Number,
+    buyStopPrice:{type:Number,default:0},
+    sellStopPrice:{type:Number,default:1000000},
     stopPrice:Number,
     preStopPrice:Number,
     prePrice:Number,
@@ -38,6 +40,7 @@ const levelPriceCelveSchema = new Schema({
     actions: {type:Array,default:[]},
     offset: {type: Number,default: 0.5},
     state: {type:Boolean,default:true},
+    runningState: {type:String,default:'noStart'},
 }, {
     collection: 'levelPriceCelve'
 })
