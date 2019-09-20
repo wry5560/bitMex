@@ -8,6 +8,7 @@ const levelPriceCelveSchema = new Schema({
     levelStopType:{type:String,default:'normal'},
     autoStop:{type:Boolean,default:false},
     stopLevel:{type:Number,default:0},
+    autoStopLevel:{type:Number,default:0},
     totalTimes:{type:Number,default:0},
     dayTradeTimes:{type:Array,default:[]},
     reduceTimes:{type:Number,default:0},
